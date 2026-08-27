@@ -1,0 +1,24 @@
+name: Feature request
+description: Propose a focused, privacy-preserving Lebanon commerce enhancement.
+title: "[Feature]: "
+labels: [enhancement]
+body:
+  - type: textarea
+    id: problem
+    attributes:
+      label: Merchant/customer problem
+      description: Describe the real workflow problem before proposing UI or code.
+    validations:
+      required: true
+  - type: textarea
+    id: proposal
+    attributes:
+      label: Proposed behavior
+    validations:
+      required: true
+  - type: textarea
+    id: compatibility
+    attributes:
+      label: Classic checkout, Checkout Blocks, HPOS, RTL, and privacy impact
+    validations:
+      required: true

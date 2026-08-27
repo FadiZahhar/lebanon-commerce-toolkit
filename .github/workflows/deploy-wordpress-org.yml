@@ -1,0 +1,34 @@
+name: Deploy to WordPress.org
+
+on:
+  workflow_dispatch:
+    inputs:
+      tag:
+        description: Exact numeric release tag, for example 1.0.0
+        required: true
+        type: string
+
+permissions:
+  contents: read
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ inputs.tag }}
+      - name: Verify requested tag matches plugin version
+        run: |
+          bash bin/check-version.sh
+          VERSION="$(sed -nE 's/^ \* Version:[[:space:]]+([^[:space:]]+).*/\1/p' lebanon-commerce-toolkit.php | head -1)"
+          test "${{ inputs.tag }}" = "$VERSION"
+      - name: Deploy plugin
+        uses: 10up/action-wordpress-plugin-deploy@stable
+        env:
+          SVN_USERNAME: ${{ secrets.SVN_USERNAME }}
+          SVN_PASSWORD: ${{ secrets.SVN_PASSWORD }}
+          SLUG: lebanon-commerce-toolkit
+          VERSION: ${{ inputs.tag }}
+        with:
+          generate-zip: true

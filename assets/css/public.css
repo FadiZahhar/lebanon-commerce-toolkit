@@ -1,0 +1,44 @@
+.lct-location-selector {
+	display: grid;
+	grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+	gap: 1rem;
+	inline-size: 100%;
+}
+
+.lct-field {
+	display: flex;
+	flex-direction: column;
+	gap: .35rem;
+	min-inline-size: 0;
+}
+
+.lct-field label {
+	font: inherit;
+	font-weight: 600;
+}
+
+.lct-field input,
+.lct-field select {
+	box-sizing: border-box;
+	inline-size: 100%;
+	min-block-size: 44px;
+	padding-block: .6rem;
+	padding-inline: .75rem;
+	border: 1px solid currentColor;
+	border-radius: .25rem;
+	background: transparent;
+	color: inherit;
+	font: inherit;
+}
+
+.lct-secondary-price {
+	display: block;
+	margin-block-start: .2em;
+	font-size: .82em;
+	font-weight: 500;
+	opacity: .75;
+}
+
+.lct-field--hidden {
+	display: none !important;
+}

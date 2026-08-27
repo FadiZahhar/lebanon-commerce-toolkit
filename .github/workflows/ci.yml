@@ -1,0 +1,48 @@
+name: CI
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+permissions:
+  contents: read
+
+jobs:
+  php:
+    name: PHP and domain tests (${{ matrix.php }})
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        php: ['7.4', '8.1', '8.3', '8.4']
+    steps:
+      - uses: actions/checkout@v4
+      - uses: shivammathur/setup-php@v2
+        with:
+          php-version: ${{ matrix.php }}
+          coverage: none
+          tools: composer:v2
+      - run: composer validate --strict
+      - run: composer install --no-interaction --prefer-dist
+      - run: composer test
+      - run: node --check assets/js/location-selector.js
+      - run: node --check assets/js/classic-checkout.js
+      - run: node --check assets/js/block-checkout.js
+      - run: node --check blocks/editor.js
+      - run: bash bin/check-version.sh
+
+  plugin-check:
+    name: WordPress Plugin Check
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - run: bash bin/build-zip.sh
+      - run: |
+          mkdir plugin-build
+          unzip -q dist/lebanon-commerce-toolkit-*.zip -d plugin-build
+      - uses: wordpress/plugin-check-action@v1
+        with:
+          build-dir: ./plugin-build/lebanon-commerce-toolkit
+          wp-version: latest
+          strict: true

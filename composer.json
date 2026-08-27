@@ -1,0 +1,45 @@
+{
+  "name": "pro-solutions-net/lebanon-commerce-toolkit",
+  "description": "Lebanese checkout, phone, secondary-currency, and district-shipping tools for WooCommerce.",
+  "type": "wordpress-plugin",
+  "license": "GPL-2.0-or-later",
+  "homepage": "https://pro-solutions.net/",
+  "require": {
+    "php": ">=7.4"
+  },
+  "require-dev": {
+    "dealerdirect/phpcodesniffer-composer-installer": "^1.0",
+    "phpcompatibility/phpcompatibility-wp": "^2.1",
+    "phpunit/phpunit": "^9.6",
+    "squizlabs/php_codesniffer": "^3.10",
+    "wp-coding-standards/wpcs": "^3.0"
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "ProSolutions\\LebanonCommerceToolkit\\Tests\\": "tests/"
+    }
+  },
+  "scripts": {
+    "lint:php": "find . -path ./vendor -prune -o -name '*.php' -print0 | xargs -0 -n1 php -l",
+    "lint:json": "@php bin/check-json.php",
+    "audit:source": "bash bin/audit-source.sh",
+    "lint:phpcs": "phpcs -q --runtime-set ignore_warnings_on_exit 1",
+    "test:smoke": "@php tests/smoke.php",
+    "test:unit": "phpunit",
+    "test": [
+      "@lint:php",
+      "@lint:json",
+      "@audit:source",
+      "@lint:phpcs",
+      "@test:smoke",
+      "@test:unit"
+    ],
+    "build": "bash bin/build-all.sh"
+  },
+  "config": {
+    "allow-plugins": {
+      "dealerdirect/phpcodesniffer-composer-installer": true
+    },
+    "sort-packages": true
+  }
+}

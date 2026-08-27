@@ -1,0 +1,31 @@
+name: Build GitHub Release
+
+on:
+  push:
+    tags: ['*']
+
+permissions:
+  contents: write
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Verify tag matches plugin version
+        run: |
+          bash bin/check-version.sh
+          VERSION="$(sed -nE 's/^ \* Version:[[:space:]]+([^[:space:]]+).*/\1/p' lebanon-commerce-toolkit.php | head -1)"
+          test "$GITHUB_REF_NAME" = "$VERSION"
+      - run: bash bin/build-all.sh
+      - name: Create GitHub release
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          gh release create "$GITHUB_REF_NAME" \
+            dist/lebanon-commerce-toolkit-"$GITHUB_REF_NAME".zip \
+            dist/lebanon-commerce-toolkit-source-"$GITHUB_REF_NAME".zip \
+            dist/SHA256SUMS.txt \
+            --verify-tag \
+            --generate-notes \
+            --title "Lebanon Commerce Toolkit $GITHUB_REF_NAME"

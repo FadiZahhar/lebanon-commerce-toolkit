@@ -1,0 +1,58 @@
+name: Bug report
+description: Report reproducible plugin behavior. Do not disclose vulnerabilities here.
+title: "[Bug]: "
+labels: [bug, needs reproduction]
+body:
+  - type: markdown
+    attributes:
+      value: For security issues, use GitHub private vulnerability reporting.
+  - type: input
+    id: plugin-version
+    attributes:
+      label: Plugin version
+    validations:
+      required: true
+  - type: input
+    id: environment
+    attributes:
+      label: WordPress / WooCommerce / PHP versions
+      placeholder: WordPress 7.1, WooCommerce 11.0.1, PHP 8.3
+    validations:
+      required: true
+  - type: dropdown
+    id: checkout
+    attributes:
+      label: Checkout type
+      options:
+        - Classic checkout
+        - Checkout Block
+        - Both
+        - Not checkout-related
+    validations:
+      required: true
+  - type: dropdown
+    id: hpos
+    attributes:
+      label: HPOS
+      options:
+        - Enabled
+        - Disabled / compatibility mode
+        - Unknown
+  - type: textarea
+    id: steps
+    attributes:
+      label: Reproduction steps
+    validations:
+      required: true
+  - type: textarea
+    id: expected
+    attributes:
+      label: Expected result
+    validations:
+      required: true
+  - type: textarea
+    id: actual
+    attributes:
+      label: Actual result and sanitized logs
+    validations:
+      required: true

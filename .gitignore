@@ -1,0 +1,12 @@
+/vendor/
+/node_modules/
+/dist/
+.phpunit.result.cache
+.phpcs-cache
+.wp-env.override.json
+.DS_Store
+.idea/
+.vscode/
+
+__pycache__/
+*.pyc

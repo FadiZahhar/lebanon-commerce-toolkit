@@ -1,0 +1,25 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/block.json",
+  "apiVersion": 3,
+  "name": "lebanon-commerce-toolkit/secondary-price",
+  "version": "0.1.0",
+  "title": "Lebanon Secondary Price",
+  "category": "widgets",
+  "icon": "money-alt",
+  "description": "Shows the configured informational secondary currency amount.",
+  "textdomain": "lebanon-commerce-toolkit",
+  "editorScript": "lct-blocks-editor",
+  "attributes": {
+    "productId": {
+      "type": "number",
+      "default": 0
+    },
+    "amount": {
+      "type": "string",
+      "default": ""
+    }
+  },
+  "supports": {
+    "html": false
+  }
+}

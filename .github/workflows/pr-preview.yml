@@ -1,0 +1,35 @@
+name: PR Preview
+
+on:
+  pull_request:
+    types: [opened, synchronize, reopened, edited]
+
+permissions:
+  contents: read
+  pull-requests: write
+
+jobs:
+  preview:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: WordPress/action-wp-playground-pr-preview@v3
+        with:
+          plugin-path: .
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          blueprint: |
+            {
+              "$schema": "https://playground.wordpress.net/blueprint-schema.json",
+              "preferredVersions": { "php": "8.3", "wp": "latest" },
+              "landingPage": "/wp-admin/admin.php?page=lebanon-commerce-toolkit",
+              "login": true,
+              "steps": [
+                {
+                  "step": "installPlugin",
+                  "pluginData": {
+                    "resource": "wordpress.org/plugins",
+                    "slug": "woocommerce"
+                  },
+                  "options": { "activate": true }
+                }
+              ]
+            }

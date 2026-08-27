@@ -1,0 +1,25 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/block.json",
+  "apiVersion": 3,
+  "name": "lebanon-commerce-toolkit/location-selector",
+  "version": "0.1.0",
+  "title": "Lebanon Location Selector",
+  "category": "widgets",
+  "icon": "location-alt",
+  "description": "Governorate, district, and optional city/area fields.",
+  "textdomain": "lebanon-commerce-toolkit",
+  "editorScript": "lct-blocks-editor",
+  "attributes": {
+    "showCity": {
+      "type": "boolean",
+      "default": true
+    },
+    "required": {
+      "type": "boolean",
+      "default": false
+    }
+  },
+  "supports": {
+    "html": false
+  }
+}

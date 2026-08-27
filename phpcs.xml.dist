@@ -1,0 +1,41 @@
+<?xml version="1.0"?>
+<ruleset name="Lebanon Commerce Toolkit">
+	<description>WordPress, documentation, and PHP 7.4+ compatibility rules.</description>
+
+	<file>lebanon-commerce-toolkit.php</file>
+	<file>uninstall.php</file>
+	<file>src</file>
+	<file>data</file>
+
+	<exclude-pattern>vendor/*</exclude-pattern>
+	<exclude-pattern>dist/*</exclude-pattern>
+
+	<arg name="basepath" value="."/>
+	<arg name="extensions" value="php"/>
+	<arg name="parallel" value="8"/>
+
+	<rule ref="WordPress-Core"/>
+	<rule ref="WordPress-Docs"/>
+	<rule ref="WordPress-Extra"/>
+	<rule ref="PHPCompatibilityWP"/>
+
+	<!-- PSR-4 class filenames are intentional in this repository. -->
+	<rule ref="WordPress.Files.FileName">
+		<severity>0</severity>
+	</rule>
+
+	<config name="testVersion" value="7.4-"/>
+	<config name="minimum_supported_wp_version" value="6.9"/>
+
+	<rule ref="WordPress.NamingConventions.PrefixAllGlobals">
+		<properties>
+			<property name="prefixes" type="array" value="lct,LCT,ProSolutions"/>
+		</properties>
+	</rule>
+
+	<rule ref="WordPress.WP.I18n">
+		<properties>
+			<property name="text_domain" type="array" value="lebanon-commerce-toolkit"/>
+		</properties>
+	</rule>
+</ruleset>
